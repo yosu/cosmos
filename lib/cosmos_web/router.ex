@@ -21,13 +21,6 @@ defmodule CosmosWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-
-    live "/journals", JournalLive.Index, :index
-    live "/journals/new", JournalLive.Index, :new
-    live "/journals/:id/edit", JournalLive.Index, :edit
-
-    live "/journals/:id", JournalLive.Show, :show
-    live "/journals/:id/show/edit", JournalLive.Show, :edit
   end
 
 
@@ -76,6 +69,13 @@ defmodule CosmosWeb.Router do
       on_mount: [{CosmosWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+      live "/journals", JournalLive.Index, :index
+      live "/journals/new", JournalLive.Index, :new
+      live "/journals/:id/edit", JournalLive.Index, :edit
+
+      live "/journals/:id", JournalLive.Show, :show
+      live "/journals/:id/show/edit", JournalLive.Show, :edit
     end
   end
 

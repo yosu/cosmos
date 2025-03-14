@@ -14,7 +14,7 @@ defmodule CosmosWeb.JournalLiveTest do
   end
 
   describe "Index" do
-    setup [:create_journal]
+    setup [:create_journal, :register_and_log_in_user]
 
     test "lists all journals", %{conn: conn} do
       {:ok, _index_live, html} = live(conn, ~p"/journals")
@@ -75,7 +75,7 @@ defmodule CosmosWeb.JournalLiveTest do
   end
 
   describe "Show" do
-    setup [:create_journal]
+    setup [:create_journal, :register_and_log_in_user]
 
     test "displays journal", %{conn: conn, journal: journal} do
       {:ok, _show_live, html} = live(conn, ~p"/journals/#{journal}")
