@@ -47,6 +47,13 @@ defmodule Cosmos.Journaling do
   end
 
   @doc """
+  Returns select options of ratings.
+  """
+  def rating_options() do
+    [nil | Range.to_list(0..10)]
+  end
+
+  @doc """
   Creates a journal.
 
   ## Examples
