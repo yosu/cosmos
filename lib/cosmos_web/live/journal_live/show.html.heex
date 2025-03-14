@@ -1,0 +1,29 @@
+<.header>
+  Journal {@journal.id}
+  <:subtitle>This is a journal record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/journals/#{@journal}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit journal</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Date at">{@journal.date_at}</:item>
+  <:item title="Morning rate">{@journal.morning_rate}</:item>
+  <:item title="Afternoon rate">{@journal.afternoon_rate}</:item>
+  <:item title="Evening rate">{@journal.evening_rate}</:item>
+</.list>
+
+<.back navigate={~p"/journals"}>Back to journals</.back>
+
+<.modal :if={@live_action == :edit} id="journal-modal" show on_cancel={JS.patch(~p"/journals/#{@journal}")}>
+  <.live_component
+    module={CosmosWeb.JournalLive.FormComponent}
+    id={@journal.id}
+    title={@page_title}
+    action={@live_action}
+    journal={@journal}
+    patch={~p"/journals/#{@journal}"}
+  />
+</.modal>
