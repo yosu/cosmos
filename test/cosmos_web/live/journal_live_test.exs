@@ -4,8 +4,8 @@ defmodule CosmosWeb.JournalLiveTest do
   import Phoenix.LiveViewTest
   import Cosmos.JournalingFixtures
 
-  @create_attrs %{date_at: "2025-03-13", morning_rate: 10, afternoon_rate: 10, evening_rate: 10}
-  @update_attrs %{date_at: "2025-03-14", morning_rate: 0, afternoon_rate: 0, evening_rate: 0}
+  @create_attrs %{date_at: "2025-03-14", morning_rate: 10, afternoon_rate: 10, evening_rate: 10}
+  @update_attrs %{date_at: "2025-03-15", morning_rate: 0, afternoon_rate: 0, evening_rate: 0}
   @invalid_attrs %{date_at: nil, morning_rate: nil, afternoon_rate: nil, evening_rate: nil}
 
   defp create_journal(_) do

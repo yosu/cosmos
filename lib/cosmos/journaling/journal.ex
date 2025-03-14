@@ -16,6 +16,7 @@ defmodule Cosmos.Journaling.Journal do
     journal
     |> cast(attrs, [:date_at, :morning_rate, :afternoon_rate, :evening_rate])
     |> validate_required([:date_at])
+    |> unique_constraint(:date_at)
     |> validate_inclusion(:morning_rate, 0..10)
     |> validate_inclusion(:afternoon_rate, 0..10)
     |> validate_inclusion(:evening_rate, 0..10)

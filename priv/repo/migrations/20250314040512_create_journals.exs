@@ -7,8 +7,9 @@ defmodule Cosmos.Repo.Migrations.CreateJournals do
       add :morning_rate, :integer
       add :afternoon_rate, :integer
       add :evening_rate, :integer
-
       timestamps(type: :utc_datetime_usec)
     end
+
+    create unique_index(:journals, :date_at)
   end
 end

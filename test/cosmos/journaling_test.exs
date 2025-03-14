@@ -35,6 +35,13 @@ defmodule Cosmos.JournalingTest do
       assert {:error, %Ecto.Changeset{}} = Journaling.create_journal(@invalid_attrs)
     end
 
+    test "create_journal/1 with duplicate date returns error changeset" do
+      attrs = %{date_at: ~D[2025-03-13], morning_rate: 10, afternoon_rate: 10, evening_rate: 10}
+
+      assert {:ok, %Journal{}} = Journaling.create_journal(attrs)
+      assert {:error, %Ecto.Changeset{}} = Journaling.create_journal(attrs)
+    end
+
     test "create_journal/1 with invalid morning_rate returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Journaling.create_journal(@invalid_morning_rate)
     end
