@@ -1,5 +1,5 @@
 defmodule Cosmos.Journaling.Journal do
-  use Cosmos.Schema
+  use Cosmos.Schema, prefix: "jnl_"
   import Ecto.Changeset
 
   schema "journals" do

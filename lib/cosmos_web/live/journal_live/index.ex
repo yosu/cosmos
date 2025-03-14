@@ -2,7 +2,6 @@ defmodule CosmosWeb.JournalLive.Index do
   use CosmosWeb, :live_view
 
   alias Cosmos.Journaling
-  alias Cosmos.Journaling.Journal
 
   @impl true
   def mount(_params, _session, socket) do
@@ -23,7 +22,7 @@ defmodule CosmosWeb.JournalLive.Index do
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "New Journal")
-    |> assign(:journal, %Journal{})
+    |> assign(:journal, Journaling.today_journal())
   end
 
   defp apply_action(socket, :index, _params) do

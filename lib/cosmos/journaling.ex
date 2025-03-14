@@ -38,6 +38,15 @@ defmodule Cosmos.Journaling do
   def get_journal!(id), do: Repo.get!(Journal, id)
 
   @doc """
+  Returns today's journal changeset
+  """
+  def today_journal() do
+    today = DateTime.now!("Asia/Tokyo") |> DateTime.to_date()
+
+    %Journal{date_at: today}
+  end
+
+  @doc """
   Creates a journal.
 
   ## Examples
