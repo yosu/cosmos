@@ -1,21 +1,20 @@
 <.header>
-  Journal {@journal.id}
-  <:subtitle>This is a journal record from your database.</:subtitle>
+  記録
   <:actions>
     <.link patch={~p"/journals/#{@journal}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Edit journal</.button>
+      <.button>変更</.button>
     </.link>
   </:actions>
 </.header>
 
 <.list>
-  <:item title="Date at">{@journal.date_at}</:item>
-  <:item title="Morning rate">{@journal.morning_rate}</:item>
-  <:item title="Afternoon rate">{@journal.afternoon_rate}</:item>
-  <:item title="Evening rate">{@journal.evening_rate}</:item>
+  <:item title="日付">{@journal.date_at}</:item>
+  <:item title="朝☀️">{@journal.morning_rate}</:item>
+  <:item title="昼🕛">{@journal.afternoon_rate}</:item>
+  <:item title="夜🌃">{@journal.evening_rate}</:item>
 </.list>
 
-<.back navigate={~p"/journals"}>Back to journals</.back>
+<.back navigate={~p"/journals"}>戻る</.back>
 
 <.modal :if={@live_action == :edit} id="journal-modal" show on_cancel={JS.patch(~p"/journals/#{@journal}")}>
   <.live_component

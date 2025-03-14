@@ -15,19 +15,19 @@ defmodule CosmosWeb.JournalLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Journal")
+    |> assign(:page_title, "記録の変更")
     |> assign(:journal, Journaling.get_journal!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Journal")
+    |> assign(:page_title, "新規記録")
     |> assign(:journal, Journaling.today_journal())
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Journals")
+    |> assign(:page_title, "記録リスト")
     |> assign(:journal, nil)
   end
 

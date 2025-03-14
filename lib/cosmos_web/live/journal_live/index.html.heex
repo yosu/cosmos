@@ -1,8 +1,7 @@
 <.header>
-  Listing Journals
   <:actions>
     <.link patch={~p"/journals/new"}>
-      <.button>New Journal</.button>
+      <.button>つける</.button>
     </.link>
   </:actions>
 </.header>
@@ -12,22 +11,22 @@
   rows={@streams.journals}
   row_click={fn {_id, journal} -> JS.navigate(~p"/journals/#{journal}") end}
 >
-  <:col :let={{_id, journal}} label="Date at">{journal.date_at}</:col>
-  <:col :let={{_id, journal}} label="Morning rate">{journal.morning_rate}</:col>
-  <:col :let={{_id, journal}} label="Afternoon rate">{journal.afternoon_rate}</:col>
-  <:col :let={{_id, journal}} label="Evening rate">{journal.evening_rate}</:col>
+  <:col :let={{_id, journal}} label="日付">{journal.date_at}</:col>
+  <:col :let={{_id, journal}} label="朝☀️">{journal.morning_rate}</:col>
+  <:col :let={{_id, journal}} label="昼🕛">{journal.afternoon_rate}</:col>
+  <:col :let={{_id, journal}} label="夜🌃">{journal.evening_rate}</:col>
   <:action :let={{_id, journal}}>
     <div class="sr-only">
-      <.link navigate={~p"/journals/#{journal}"}>Show</.link>
+      <.link navigate={~p"/journals/#{journal}"}>見る</.link>
     </div>
-    <.link patch={~p"/journals/#{journal}/edit"}>Edit</.link>
+    <.link patch={~p"/journals/#{journal}/edit"}>変更</.link>
   </:action>
   <:action :let={{id, journal}}>
     <.link
       phx-click={JS.push("delete", value: %{id: journal.id}) |> hide("##{id}")}
       data-confirm="Are you sure?"
     >
-      Delete
+      削除
     </.link>
   </:action>
 </.table>

@@ -51,8 +51,8 @@ defmodule CosmosWeb.UserRegistrationLiveTest do
       conn = get(conn, "/")
       response = html_response(conn, 200)
       assert response =~ email
-      assert response =~ "Settings"
-      assert response =~ "Log out"
+      assert response =~ "設定"
+      assert response =~ "ログアウト"
     end
 
     test "renders errors for duplicated email", %{conn: conn} do

@@ -16,6 +16,6 @@ defmodule CosmosWeb.JournalLive.Show do
      |> assign(:journal, Journaling.get_journal!(id))}
   end
 
-  defp page_title(:show), do: "Show Journal"
-  defp page_title(:edit), do: "Edit Journal"
+  defp page_title(:show), do: "記録を見る"
+  defp page_title(:edit), do: "記録の編集"
 end

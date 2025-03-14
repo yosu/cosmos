@@ -9,7 +9,6 @@ defmodule CosmosWeb.JournalLive.FormComponent do
     <div>
       <.header>
         {@title}
-        <:subtitle>Use this form to manage journal records in your database.</:subtitle>
       </.header>
 
       <.simple_form
@@ -19,12 +18,12 @@ defmodule CosmosWeb.JournalLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:date_at]} type="date" label="Date at" />
-        <.input field={@form[:morning_rate]} type="select" label="Morning rate" options={Journaling.rating_options()} />
-        <.input field={@form[:afternoon_rate]} type="select" label="Afternoon rate" options={Journaling.rating_options()} />
-        <.input field={@form[:evening_rate]} type="select" label="Evening rate" options={Journaling.rating_options()} />
+        <.input field={@form[:date_at]} type="date" label="日付" />
+        <.input field={@form[:morning_rate]} type="select" label="朝☀️" options={Journaling.rating_options()} />
+        <.input field={@form[:afternoon_rate]} type="select" label="昼🕛" options={Journaling.rating_options()} />
+        <.input field={@form[:evening_rate]} type="select" label="夜🌃" options={Journaling.rating_options()} />
         <:actions>
-          <.button phx-disable-with="Saving...">Save Journal</.button>
+          <.button phx-disable-with="保存中...">保存</.button>
         </:actions>
       </.simple_form>
     </div>

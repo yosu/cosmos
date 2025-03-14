@@ -19,14 +19,14 @@ defmodule CosmosWeb.JournalLiveTest do
     test "lists all journals", %{conn: conn} do
       {:ok, _index_live, html} = live(conn, ~p"/journals")
 
-      assert html =~ "Listing Journals"
+      assert html =~ "記録リスト"
     end
 
     test "saves new journal", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, ~p"/journals")
 
-      assert index_live |> element("a", "New Journal") |> render_click() =~
-               "New Journal"
+      assert index_live |> element("a", "つける") |> render_click() =~
+               "つける"
 
       assert_patch(index_live, ~p"/journals/new")
 
@@ -47,8 +47,8 @@ defmodule CosmosWeb.JournalLiveTest do
     test "updates journal in listing", %{conn: conn, journal: journal} do
       {:ok, index_live, _html} = live(conn, ~p"/journals")
 
-      assert index_live |> element("#journals-#{journal.id} a", "Edit") |> render_click() =~
-               "Edit Journal"
+      assert index_live |> element("#journals-#{journal.id} a", "変更") |> render_click() =~
+               "記録の変更"
 
       assert_patch(index_live, ~p"/journals/#{journal}/edit")
 
@@ -69,7 +69,7 @@ defmodule CosmosWeb.JournalLiveTest do
     test "deletes journal in listing", %{conn: conn, journal: journal} do
       {:ok, index_live, _html} = live(conn, ~p"/journals")
 
-      assert index_live |> element("#journals-#{journal.id} a", "Delete") |> render_click()
+      assert index_live |> element("#journals-#{journal.id} a", "削除") |> render_click()
       refute has_element?(index_live, "#journals-#{journal.id}")
     end
   end
@@ -80,14 +80,14 @@ defmodule CosmosWeb.JournalLiveTest do
     test "displays journal", %{conn: conn, journal: journal} do
       {:ok, _show_live, html} = live(conn, ~p"/journals/#{journal}")
 
-      assert html =~ "Show Journal"
+      assert html =~ "見る"
     end
 
     test "updates journal within modal", %{conn: conn, journal: journal} do
       {:ok, show_live, _html} = live(conn, ~p"/journals/#{journal}")
 
-      assert show_live |> element("a", "Edit") |> render_click() =~
-               "Edit Journal"
+      assert show_live |> element("a", "変更") |> render_click() =~
+               "変更"
 
       assert_patch(show_live, ~p"/journals/#{journal}/show/edit")
 
