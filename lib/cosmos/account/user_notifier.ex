@@ -8,7 +8,7 @@ defmodule Cosmos.Account.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"Cosmos", "contact@example.com"})
+      |> from({"Cosmos", "contact@fine-code.com"})
       |> subject(subject)
       |> text_body(body)
 
