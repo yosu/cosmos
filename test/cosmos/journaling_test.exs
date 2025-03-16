@@ -22,7 +22,12 @@ defmodule Cosmos.JournalingTest do
     end
 
     test "create_journal/1 with valid data creates a journal" do
-      valid_attrs = %{date_at: ~D[2025-03-13], morning_rate: 10, afternoon_rate: 10, evening_rate: 10}
+      valid_attrs = %{
+        date_at: ~D[2025-03-13],
+        morning_rate: 10,
+        afternoon_rate: 10,
+        evening_rate: 10
+      }
 
       assert {:ok, %Journal{} = journal} = Journaling.create_journal(valid_attrs)
       assert journal.date_at == ~D[2025-03-13]
@@ -48,7 +53,13 @@ defmodule Cosmos.JournalingTest do
 
     test "update_journal/2 with valid data updates the journal" do
       journal = journal_fixture()
-      update_attrs = %{date_at: ~D[2025-03-14], morning_rate: 0, afternoon_rate: 0, evening_rate: 0}
+
+      update_attrs = %{
+        date_at: ~D[2025-03-14],
+        morning_rate: 0,
+        afternoon_rate: 0,
+        evening_rate: 0
+      }
 
       assert {:ok, %Journal{} = journal} = Journaling.update_journal(journal, update_attrs)
       assert journal.date_at == ~D[2025-03-14]
@@ -59,7 +70,13 @@ defmodule Cosmos.JournalingTest do
 
     test "update_journal/2 with nil data updates the journal" do
       journal = journal_fixture()
-      update_attrs = %{date_at: ~D[2025-03-14], morning_rate: nil, afternoon_rate: nil, evening_rate: nil}
+
+      update_attrs = %{
+        date_at: ~D[2025-03-14],
+        morning_rate: nil,
+        afternoon_rate: nil,
+        evening_rate: nil
+      }
 
       assert {:ok, %Journal{} = journal} = Journaling.update_journal(journal, update_attrs)
       assert journal.date_at == ~D[2025-03-14]

@@ -23,7 +23,6 @@ defmodule CosmosWeb.Router do
     get "/", PageController, :home
   end
 
-
   # Other scopes may use custom stacks.
   # scope "/api", CosmosWeb do
   #   pipe_through :api

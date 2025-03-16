@@ -16,7 +16,12 @@
 
 <.back navigate={~p"/journals"}>戻る</.back>
 
-<.modal :if={@live_action == :edit} id="journal-modal" show on_cancel={JS.patch(~p"/journals/#{@journal}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="journal-modal"
+  show
+  on_cancel={JS.patch(~p"/journals/#{@journal}")}
+>
   <.live_component
     module={CosmosWeb.JournalLive.FormComponent}
     id={@journal.id}

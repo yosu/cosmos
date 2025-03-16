@@ -19,9 +19,24 @@ defmodule CosmosWeb.JournalLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:date_at]} type="date" label="日付" />
-        <.input field={@form[:morning_rate]} type="select" label="朝☀️" options={Journaling.rating_options()} />
-        <.input field={@form[:afternoon_rate]} type="select" label="昼🕛" options={Journaling.rating_options()} />
-        <.input field={@form[:evening_rate]} type="select" label="夜🌃" options={Journaling.rating_options()} />
+        <.input
+          field={@form[:morning_rate]}
+          type="select"
+          label="朝☀️"
+          options={Journaling.rating_options()}
+        />
+        <.input
+          field={@form[:afternoon_rate]}
+          type="select"
+          label="昼🕛"
+          options={Journaling.rating_options()}
+        />
+        <.input
+          field={@form[:evening_rate]}
+          type="select"
+          label="夜🌃"
+          options={Journaling.rating_options()}
+        />
         <:actions>
           <.button phx-disable-with="保存中...">保存</.button>
         </:actions>
