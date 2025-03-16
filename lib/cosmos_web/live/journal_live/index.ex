@@ -1,5 +1,6 @@
 defmodule CosmosWeb.JournalLive.Index do
   use CosmosWeb, :live_view
+  import CosmosWeb.JournalLive.Component
 
   alias Cosmos.Journaling
 

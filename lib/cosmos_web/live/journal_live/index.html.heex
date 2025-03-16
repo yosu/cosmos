@@ -6,30 +6,7 @@
   </:actions>
 </.header>
 
-<.table
-  id="journals"
-  rows={@streams.journals}
-  row_click={fn {_id, journal} -> JS.navigate(~p"/journals/#{journal}") end}
->
-  <:col :let={{_id, journal}} label="日付">{journal.date_at}</:col>
-  <:col :let={{_id, journal}} label="朝☀️">{journal.morning_rate}</:col>
-  <:col :let={{_id, journal}} label="昼🕛">{journal.afternoon_rate}</:col>
-  <:col :let={{_id, journal}} label="夜🌃">{journal.evening_rate}</:col>
-  <:action :let={{_id, journal}}>
-    <div class="sr-only">
-      <.link navigate={~p"/journals/#{journal}"}>見る</.link>
-    </div>
-    <.link patch={~p"/journals/#{journal}/edit"}>変更</.link>
-  </:action>
-  <:action :let={{id, journal}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: journal.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
-    >
-      削除
-    </.link>
-  </:action>
-</.table>
+<.journal_list id="journals" rows={@streams.journals} />
 
 <.modal
   :if={@live_action in [:new, :edit]}
