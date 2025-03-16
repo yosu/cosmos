@@ -1,4 +1,5 @@
 defmodule Cosmos.Account.User do
+  @moduledoc false
   use Cosmos.Schema
   import Ecto.Changeset
 

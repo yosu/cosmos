@@ -1,4 +1,7 @@
 defmodule Cosmos.Journaling.Journal do
+  @moduledoc """
+  Schema of the daily journal log.
+  """
   use Cosmos.Schema, prefix: "jnl_"
   import Ecto.Changeset
 

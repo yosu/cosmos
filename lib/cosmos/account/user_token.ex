@@ -1,4 +1,5 @@
 defmodule Cosmos.Account.UserToken do
+  @moduledoc false
   use Cosmos.Schema
   import Ecto.Query
   alias Cosmos.Account.UserToken

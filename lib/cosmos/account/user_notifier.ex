@@ -1,4 +1,5 @@
 defmodule Cosmos.Account.UserNotifier do
+  @moduledoc false
   import Swoosh.Email
 
   alias Cosmos.Mailer

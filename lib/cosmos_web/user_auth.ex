@@ -1,4 +1,5 @@
 defmodule CosmosWeb.UserAuth do
+  @moduledoc false
   use CosmosWeb, :verified_routes
 
   import Plug.Conn
