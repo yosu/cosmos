@@ -33,7 +33,13 @@ defmodule CosmosWeb.JournalLive.Index do
   end
 
   @impl true
-  def handle_info({CosmosWeb.JournalLive.FormComponent, {:saved, journal}}, socket) do
+  def handle_info({CosmosWeb.JournalLive.FormComponent, {:created, _journal}}, socket) do
+    # Use stream/4 with reset option to keep the list order
+    {:noreply, stream(socket, :journals, Journaling.list_journals(), reset: true)}
+  end
+
+  @impl true
+  def handle_info({CosmosWeb.JournalLive.FormComponent, {:updated, journal}}, socket) do
     {:noreply, stream_insert(socket, :journals, journal)}
   end
 

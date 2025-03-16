@@ -68,7 +68,7 @@ defmodule CosmosWeb.JournalLive.FormComponent do
   defp save_journal(socket, :edit, journal_params) do
     case Journaling.update_journal(socket.assigns.journal, journal_params) do
       {:ok, journal} ->
-        notify_parent({:saved, journal})
+        notify_parent({:updated, journal})
 
         {:noreply,
          socket
@@ -83,7 +83,7 @@ defmodule CosmosWeb.JournalLive.FormComponent do
   defp save_journal(socket, :new, journal_params) do
     case Journaling.create_journal(journal_params) do
       {:ok, journal} ->
-        notify_parent({:saved, journal})
+        notify_parent({:created, journal})
 
         {:noreply,
          socket

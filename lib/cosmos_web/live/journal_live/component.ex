@@ -27,7 +27,7 @@ defmodule CosmosWeb.JournalLive.Component do
           class="relative divide-y divide-zinc-200 border-t border-zinc-400 text-sm leading-6 text-zinc-700"
         >
           <tr :for={{row_id, journal} <- @rows} id={row_id} class="group hover:bg-zinc-50">
-            <td phx-click={JS.navigate(~p"/journals/#{journal}")}>
+            <td phx-click={JS.navigate(~p"/journals/#{journal}/edit")}>
               {Calendar.strftime(journal.date_at, "%-m/%d")}
             </td>
             <td phx-click={JS.navigate(~p"/journals/#{journal}")}>{journal.morning_rate}</td>
