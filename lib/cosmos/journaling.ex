@@ -21,6 +21,90 @@ defmodule Cosmos.Journaling do
     Repo.all(Journal |> order_by(:date_at))
   end
 
+  def get_chart_data_for(:all) do
+    journals = Repo.all(Journal |> order_by(:date_at))
+
+    dates = Enum.map(journals, & &1.date_at) |> Cosmos.Date.pad_dates()
+
+    labels =
+      Enum.reduce(dates, [], fn d, acc ->
+        date = Calendar.strftime(d, "%-m/%d")
+        ["#{date} 夜", "#{date} 昼", "#{date} 朝" | acc]
+      end)
+
+    journal_map =
+      for j <- journals, into: %{} do
+        {j.date_at, j}
+      end
+
+    data =
+      Enum.reduce(dates, [], fn d, acc ->
+        if j = journal_map[d] do
+          [j.evening_rate, j.afternoon_rate, j.morning_rate | acc]
+        else
+          [nil, nil, nil | acc]
+        end
+      end)
+
+    line_chart(Enum.reverse(labels), Enum.reverse(data))
+  end
+
+  def get_chart_data_for(rate_name) do
+    journals = Repo.all(Journal |> order_by(:date_at))
+
+    dates = Enum.map(journals, & &1.date_at) |> Cosmos.Date.pad_dates()
+
+    labels =
+      Enum.reduce(dates, [], fn d, acc ->
+        date = Calendar.strftime(d, "%-m/%d")
+        [date | acc]
+      end)
+
+    journal_map =
+      for j <- journals, into: %{} do
+        {j.date_at, j}
+      end
+
+    data =
+      Enum.reduce(dates, [], fn d, acc ->
+        if j = journal_map[d] do
+          [Map.get(j, rate_name) | acc]
+        else
+          [nil | acc]
+        end
+      end)
+
+    line_chart(Enum.reverse(labels), Enum.reverse(data))
+  end
+
+  defp line_chart(labels, data) do
+    %{
+      type: "line",
+      data: %{
+        labels: labels,
+        datasets: [
+          %{
+            data: data,
+            borderWidth: 1
+          }
+        ]
+      },
+      options: %{
+        plugins: %{
+          legend: %{
+            display: false
+          }
+        },
+        scales: %{
+          y: %{
+            suggestedMin: 0,
+            suggestedMax: 10
+          }
+        }
+      }
+    }
+  end
+
   @doc """
   Gets a single journal.
 

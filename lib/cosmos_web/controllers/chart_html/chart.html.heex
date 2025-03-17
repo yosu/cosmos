@@ -1,0 +1,66 @@
+<div id="all" data-chart={@all_chart}>
+  <h2 class="text-xl text-center">全体</h2>
+  <canvas id="all-chart"></canvas>
+</div>
+
+<div id="morning" data-chart={@morning_chart} class="mt-8">
+  <h2 class="text-xl text-center">朝</h2>
+  <canvas id="morning-chart"></canvas>
+</div>
+
+<div id="afternoon" data-chart={@afternoon_chart} class="mt-8">
+  <h2 class="text-xl text-center">昼</h2>
+  <canvas id="afternoon-chart"></canvas>
+</div>
+
+<div id="evening" data-chart={@evening_chart} class="mt-8">
+  <h2 class="text-xl text-center">夜</h2>
+  <canvas id="evening-chart"></canvas>
+</div>
+
+<div class="ml-4">
+  <.back navigate={~p"/journals"}>記録一覧へ戻る</.back>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js">
+</script>
+
+<script>
+    const genChart = function (root_id, canvas_id) {
+      const root = document.getElementById(root_id);
+      const ctx = document.getElementById(canvas_id);
+      const { chart } = root.dataset;
+
+      new Chart(ctx, JSON.parse(chart));
+    }
+
+    genChart('all', 'all-chart');
+    genChart('morning', 'morning-chart');
+    genChart('afternoon', 'afternoon-chart');
+    genChart('evening', 'evening-chart');
+  /*
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: JSON.parse(labels),
+        datasets: [{
+          data,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            suggestedMin: 0,
+            suggestedMax: 10,
+          }
+        }
+      }
+    });
+    */
+</script>

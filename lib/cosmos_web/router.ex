@@ -76,6 +76,8 @@ defmodule CosmosWeb.Router do
       live "/journals/:id", JournalLive.Show, :show
       live "/journals/:id/show/edit", JournalLive.Show, :edit
     end
+
+    get "/chart", ChartController, :chart
   end
 
   scope "/", CosmosWeb do

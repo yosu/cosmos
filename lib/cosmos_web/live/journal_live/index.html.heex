@@ -8,6 +8,8 @@
 
 <.journal_list id="journals" rows={@streams.journals} />
 
+<.link navigate={~p"/chart"} class="text-sm text-brand ml-4">グラフで見る</.link>
+
 <.modal
   :if={@live_action in [:new, :edit]}
   id="journal-modal"
