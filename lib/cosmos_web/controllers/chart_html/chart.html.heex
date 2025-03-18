@@ -26,16 +26,16 @@
 </script>
 
 <script>
-    const genChart = function (root_id, canvas_id) {
-      const root = document.getElementById(root_id);
-      const ctx = document.getElementById(canvas_id);
-      const { chart } = root.dataset;
+  const genChart = function (root_id, canvas_id) {
+    const root = document.getElementById(root_id);
+    const ctx = document.getElementById(canvas_id);
+    const { chart } = root.dataset;
 
-      new Chart(ctx, JSON.parse(chart));
-    }
+    new Chart(ctx, JSON.parse(chart));
+  }
 
-    genChart('all', 'all-chart');
-    genChart('morning', 'morning-chart');
-    genChart('afternoon', 'afternoon-chart');
-    genChart('evening', 'evening-chart');
+  genChart('all', 'all-chart');
+  genChart('morning', 'morning-chart');
+  genChart('afternoon', 'afternoon-chart');
+  genChart('evening', 'evening-chart');
 </script>
