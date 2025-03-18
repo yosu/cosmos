@@ -143,6 +143,7 @@ defmodule CosmosWeb.CoreComponents do
   """
   attr :flash, :map, required: true, doc: "the map of flash messages"
   attr :id, :string, default: "flash-group", doc: "the optional id of flash container"
+  attr :"phx-mount", :any
 
   def flash_group(assigns) do
     ~H"""
