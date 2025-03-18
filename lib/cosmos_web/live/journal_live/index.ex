@@ -21,9 +21,17 @@ defmodule CosmosWeb.JournalLive.Index do
   end
 
   defp apply_action(socket, :new, _params) do
-    socket
-    |> assign(:page_title, "新規記録")
-    |> assign(:journal, Journaling.today_journal())
+    journal = Journaling.today_journal()
+
+    case journal.id do
+      nil ->
+        socket
+        |> assign(:page_title, "新規記録")
+        |> assign(:journal, Journaling.today_journal())
+      _ ->
+        socket
+        |> push_patch(to: ~p"/journals/#{journal}/edit")
+    end
   end
 
   defp apply_action(socket, :index, _params) do

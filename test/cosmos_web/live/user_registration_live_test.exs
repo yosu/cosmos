@@ -32,7 +32,7 @@ defmodule CosmosWeb.UserRegistrationLiveTest do
 
       assert result =~ "Register"
       assert result =~ "must have the @ sign and no spaces"
-      assert result =~ "should be at least 12 character"
+      assert result =~ "最低 12 文字です"
     end
   end
 
@@ -67,7 +67,7 @@ defmodule CosmosWeb.UserRegistrationLiveTest do
         )
         |> render_submit()
 
-      assert result =~ "has already been taken"
+      assert result =~ "すでに使われています"
     end
   end
 

@@ -123,12 +123,31 @@ defmodule Cosmos.Journaling do
   def get_journal!(id), do: Repo.get!(Journal, id)
 
   @doc """
-  Returns today's journal changeset
+  Gets a single journal with given date or nil if not found.
+  """
+  def get_journal_by_date(date) do
+    journals =
+      Journal.Query.by_date(date)
+      |> Repo.all()
+
+    case journals do
+      [j] -> j
+      [] -> nil
+    end
+  end
+
+  @doc """
+  Returns today's journal
+
+  Set date_at only when the journal is not found.
   """
   def today_journal() do
     today = DateTime.now!("Asia/Tokyo") |> DateTime.to_date()
 
-    %Journal{date_at: today}
+    case get_journal_by_date(today) do
+      nil -> %Journal{date_at: today}
+      j -> j
+    end
   end
 
   @doc """
