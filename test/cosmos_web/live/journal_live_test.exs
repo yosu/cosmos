@@ -32,7 +32,7 @@ defmodule CosmosWeb.JournalLiveTest do
 
       assert index_live
              |> form("#journal-form", journal: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "入力してください"
 
       assert index_live
              |> form("#journal-form", journal: @create_attrs)
@@ -41,7 +41,7 @@ defmodule CosmosWeb.JournalLiveTest do
       assert_patch(index_live, ~p"/journals")
 
       html = render(index_live)
-      assert html =~ "Journal created successfully"
+      assert html =~ "成功"
     end
 
     test "updates journal in listing", %{conn: conn, journal: journal} do
@@ -54,7 +54,7 @@ defmodule CosmosWeb.JournalLiveTest do
 
       assert index_live
              |> form("#journal-form", journal: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "入力してください"
 
       assert index_live
              |> form("#journal-form", journal: @update_attrs)
@@ -63,7 +63,7 @@ defmodule CosmosWeb.JournalLiveTest do
       assert_patch(index_live, ~p"/journals")
 
       html = render(index_live)
-      assert html =~ "Journal updated successfully"
+      assert html =~ "成功"
     end
 
     test "deletes journal in listing", %{conn: conn, journal: journal} do
@@ -93,7 +93,7 @@ defmodule CosmosWeb.JournalLiveTest do
 
       assert show_live
              |> form("#journal-form", journal: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "入力してください"
 
       assert show_live
              |> form("#journal-form", journal: @update_attrs)
@@ -102,7 +102,7 @@ defmodule CosmosWeb.JournalLiveTest do
       assert_patch(show_live, ~p"/journals/#{journal}")
 
       html = render(show_live)
-      assert html =~ "Journal updated successfully"
+      assert html =~ "成功"
     end
   end
 end
