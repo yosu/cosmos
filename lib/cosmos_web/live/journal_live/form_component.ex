@@ -72,7 +72,7 @@ defmodule CosmosWeb.JournalLive.FormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Journal updated successfully")
+         |> put_flash(:info, "記録の変更に成功しました")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -87,7 +87,7 @@ defmodule CosmosWeb.JournalLive.FormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Journal created successfully")
+         |> put_flash(:info, "記録の作成に成功しました")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
