@@ -77,6 +77,7 @@ defmodule Cosmos.Journaling do
     line_chart(Enum.reverse(labels), Enum.reverse(data))
   end
 
+  # Returns Chart.js configuration with given data and labels
   defp line_chart(labels, data) do
     %{
       type: "line",
