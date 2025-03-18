@@ -223,6 +223,7 @@ defmodule CosmosWeb.CoreComponents do
   """
   attr :type, :string, default: nil
   attr :class, :string, default: nil
+  attr :color, :atom, values: ~w(primary secondary danger)a, default: :primary
   attr :rest, :global, include: ~w(disabled form name value)
 
   slot :inner_block, required: true
@@ -232,8 +233,13 @@ defmodule CosmosWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3",
+        "phx-submit-loading:opacity-75 rounded-lg py-2 px-3",
         "text-sm font-semibold leading-6 text-white active:text-white/80",
+        case @color do
+          :primary -> "bg-pink-600 hover:bg-pink-500"
+          :secondary -> "bg-blue-600 hover:bg-blue-500"
+          :danger -> "bg-red-600 hover:bg-red-500"
+        end,
         @class
       ]}
       {@rest}
