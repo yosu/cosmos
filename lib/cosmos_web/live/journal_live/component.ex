@@ -1,6 +1,25 @@
 defmodule CosmosWeb.JournalLive.Component do
   use CosmosWeb, :html
 
+  slot :inner_block, required: true
+
+  defp navigate_menu(assigns) do
+    ~H"""
+    <div class="relative whitespace-nowrap py-4 text-right text-sm font-medium">
+      <span class="absolute -inset-y-px -right-4 left-0 group-hover:bg-zinc-50 sm:rounded-r-xl" />
+      <span class={[
+        "relative ml-4 leading-6",
+        "shadow-[inset_0_-5px_0_0_rgba(220,107,154,0.3)]",
+        "transition-[box-shadow_0.2s_ease-out]",
+        "hover:shadow-[inset_0_-15px_0_0_rgba(220,107,154,0.3)]",
+        "hover:ease-in"
+      ]}>
+        {render_slot(@inner_block)}
+      </span>
+    </div>
+    """
+  end
+
   @doc ~S"""
   Renders a list of journals.
   """
@@ -34,28 +53,22 @@ defmodule CosmosWeb.JournalLive.Component do
             <td phx-click={JS.navigate(~p"/journals/#{journal}")}>{journal.afternoon_rate}</td>
             <td phx-click={JS.navigate(~p"/journals/#{journal}")}>{journal.evening_rate}</td>
             <td>
-              <div class="relative whitespace-nowrap py-4 text-right text-sm font-medium">
-                <span class="absolute -inset-y-px -right-4 left-0 group-hover:bg-zinc-50 sm:rounded-r-xl" />
-                <span class="relative ml-4 font-semibold leading-6 text-zinc-900 hover:text-zinc-700">
-                  <div class="sr-only">
-                    <.link navigate={~p"/journals/#{journal}"}>見る</.link>
-                  </div>
-                  <.link patch={~p"/journals/#{journal}/edit"}>変更</.link>
-                </span>
-              </div>
+              <.navigate_menu>
+                <div class="sr-only">
+                  <.link navigate={~p"/journals/#{journal}"}>見る</.link>
+                </div>
+                <.link patch={~p"/journals/#{journal}/edit"}>変更</.link>
+              </.navigate_menu>
             </td>
             <td>
-              <div class="relative whitespace-nowrap py-4 text-right text-sm font-medium">
-                <span class="absolute -inset-y-px -right-4 left-0 group-hover:bg-zinc-50 sm:rounded-r-xl" />
-                <span class="relative ml-4 font-semibold leading-6 text-zinc-900 hover:text-zinc-700">
-                  <.link
-                    phx-click={JS.push("delete", value: %{id: journal.id}) |> hide("##{row_id}")}
-                    data-confirm="Are you sure?"
-                  >
-                    削除
-                  </.link>
-                </span>
-              </div>
+              <.navigate_menu>
+                <.link
+                  phx-click={JS.push("delete", value: %{id: journal.id}) |> hide("##{row_id}")}
+                  data-confirm="Are you sure?"
+                >
+                  削除
+                </.link>
+              </.navigate_menu>
             </td>
           </tr>
         </tbody>
