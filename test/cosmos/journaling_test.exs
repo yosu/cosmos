@@ -11,9 +11,10 @@ defmodule Cosmos.JournalingTest do
     @invalid_attrs %{date_at: nil, morning_rate: nil, afternoon_rate: nil, evening_rate: nil}
     @invalid_morning_rate %{date_at: ~D[2025-03-13], morning_rate: -1}
 
-    test "list_journals/0 returns all journals" do
-      journal = journal_fixture()
-      assert Journaling.list_journals() == [journal]
+    test "list_journals/0 returns all journals descending order by date" do
+      j1 = journal_fixture(%{date_at: ~D[2025-03-13]})
+      j2 = journal_fixture(%{date_at: ~D[2025-03-14]})
+      assert Journaling.list_journals() == [j2, j1]
     end
 
     test "get_journal!/1 returns the journal with given id" do

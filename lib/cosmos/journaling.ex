@@ -9,7 +9,7 @@ defmodule Cosmos.Journaling do
   alias Cosmos.Journaling.Journal
 
   @doc """
-  Returns the list of journals order by date_at.
+  Returns the list of journals order by date_at desc.
 
   ## Examples
 
@@ -18,7 +18,7 @@ defmodule Cosmos.Journaling do
 
   """
   def list_journals do
-    Repo.all(Journal |> order_by(:date_at))
+    Repo.all(Journal |> order_by(desc: :date_at))
   end
 
   def get_chart_data_for(:all) do
