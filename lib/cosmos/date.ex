@@ -9,17 +9,10 @@ defmodule Cosmos.Date do
   def pad_dates([]), do: []
 
   def pad_dates(dates) do
-    last_date = Enum.max(dates)
-    first_date = Enum.min(dates)
+    last_date = Enum.max(dates, Date)
+    first_date = Enum.min(dates, Date)
 
-    Stream.unfold({first_date, last_date}, fn
-      {a, b} ->
-        if Date.after?(a, b) do
-          nil
-        else
-          {a, {Date.add(a, 1), b}}
-        end
-    end)
+    Date.range(first_date, last_date)
     |> Enum.to_list()
   end
 end
