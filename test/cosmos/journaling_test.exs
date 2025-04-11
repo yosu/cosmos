@@ -8,7 +8,12 @@ defmodule Cosmos.JournalingTest do
 
     import Cosmos.JournalingFixtures
 
-    @invalid_attrs %{date_at: nil, morning_rate: nil, afternoon_rate: nil, evening_rate: nil}
+    @invalid_attrs %{
+      date_at: nil,
+      morning_rate: "invalid",
+      afternoon_rate: nil,
+      evening_rate: nil
+    }
     @invalid_morning_rate %{date_at: ~D[2025-03-13], morning_rate: -1}
 
     test "list_journals/0 returns all journals descending order by date" do
@@ -53,7 +58,7 @@ defmodule Cosmos.JournalingTest do
     end
 
     test "update_journal/2 with valid data updates the journal" do
-      journal = journal_fixture()
+      j = journal_fixture()
 
       update_attrs = %{
         date_at: ~D[2025-03-14],
@@ -62,25 +67,24 @@ defmodule Cosmos.JournalingTest do
         evening_rate: 0
       }
 
-      assert {:ok, %Journal{} = journal} = Journaling.update_journal(journal, update_attrs)
-      assert journal.date_at == ~D[2025-03-14]
+      assert {:ok, %Journal{} = journal} = Journaling.update_journal(j, update_attrs)
+      assert journal.date_at == j.date_at
       assert journal.morning_rate == 0
       assert journal.afternoon_rate == 0
       assert journal.evening_rate == 0
     end
 
     test "update_journal/2 with nil data updates the journal" do
-      journal = journal_fixture()
+      j = journal_fixture()
 
       update_attrs = %{
-        date_at: ~D[2025-03-14],
         morning_rate: nil,
         afternoon_rate: nil,
         evening_rate: nil
       }
 
-      assert {:ok, %Journal{} = journal} = Journaling.update_journal(journal, update_attrs)
-      assert journal.date_at == ~D[2025-03-14]
+      assert {:ok, %Journal{} = journal} = Journaling.update_journal(j, update_attrs)
+      assert journal.date_at == j.date_at
       assert journal.morning_rate == nil
       assert journal.afternoon_rate == nil
       assert journal.evening_rate == nil
