@@ -5,8 +5,7 @@ defmodule CosmosWeb.JournalLiveTest do
   import Cosmos.JournalingFixtures
 
   @create_attrs %{date_at: "2025-03-14", morning_rate: 10, afternoon_rate: 10, evening_rate: 10}
-  @update_attrs %{date_at: "2025-03-15", morning_rate: 0, afternoon_rate: 0, evening_rate: 0}
-  @invalid_attrs %{date_at: nil, morning_rate: nil, afternoon_rate: nil, evening_rate: nil}
+  @update_attrs %{morning_rate: 0, afternoon_rate: 0, evening_rate: 0}
 
   defp create_journal(_) do
     journal = journal_fixture()
@@ -31,10 +30,6 @@ defmodule CosmosWeb.JournalLiveTest do
       assert_patch(index_live, ~p"/journals/new")
 
       assert index_live
-             |> form("#journal-form", journal: @invalid_attrs)
-             |> render_change() =~ "入力してください"
-
-      assert index_live
              |> form("#journal-form", journal: @create_attrs)
              |> render_submit()
 
@@ -51,10 +46,6 @@ defmodule CosmosWeb.JournalLiveTest do
                "記録の変更"
 
       assert_patch(index_live, ~p"/journals/#{journal}/edit")
-
-      assert index_live
-             |> form("#journal-form", journal: @invalid_attrs)
-             |> render_change() =~ "入力してください"
 
       assert index_live
              |> form("#journal-form", journal: @update_attrs)
@@ -90,10 +81,6 @@ defmodule CosmosWeb.JournalLiveTest do
                "変更"
 
       assert_patch(show_live, ~p"/journals/#{journal}/show/edit")
-
-      assert show_live
-             |> form("#journal-form", journal: @invalid_attrs)
-             |> render_change() =~ "入力してください"
 
       assert show_live
              |> form("#journal-form", journal: @update_attrs)

@@ -18,7 +18,8 @@ defmodule CosmosWeb.JournalLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:date_at]} type="date" label="日付" />
+        <.input :if={@action == :new} field={@form[:date_at]} type="date" label="日付" />
+        <div :if={@action == :edit}>{@form[:date_at].value}</div>
         <.input
           field={@form[:morning_rate]}
           type="select"

@@ -189,7 +189,7 @@ defmodule Cosmos.Journaling do
   """
   def update_journal(%Journal{} = journal, attrs) do
     journal
-    |> Journal.changeset(attrs)
+    |> Journal.update_changeset(attrs)
     |> Repo.update()
   end
 
