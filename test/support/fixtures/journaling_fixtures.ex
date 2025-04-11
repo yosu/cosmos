@@ -3,6 +3,7 @@ defmodule Cosmos.JournalingFixtures do
   This module defines test helpers for creating
   entities via the `Cosmos.Journaling` context.
   """
+  import Cosmos.AccountFixtures
 
   @doc """
   Generate a journal.
@@ -14,7 +15,8 @@ defmodule Cosmos.JournalingFixtures do
         afternoon_rate: 10,
         date_at: ~D[2025-03-13],
         evening_rate: 10,
-        morning_rate: 10
+        morning_rate: 10,
+        user_id: user_fixture().id
       })
       |> Cosmos.Journaling.create_journal()
 

@@ -82,7 +82,9 @@ defmodule CosmosWeb.JournalLive.FormComponent do
   end
 
   defp save_journal(socket, :new, journal_params) do
-    case Journaling.create_journal(journal_params) do
+    user = socket.assigns.current_user
+
+    case Journaling.create_journal(Map.merge(%{"user_id" => user.id}, journal_params)) do
       {:ok, journal} ->
         notify_parent({:created, journal})
 
