@@ -33,8 +33,8 @@ defmodule Cosmos.Journaling do
     Repo.all(query)
   end
 
-  def get_chart_data_for(:all) do
-    journals = Repo.all(Journal |> order_by(:date_at))
+  def get_chart_data_for(:all, user) do
+    journals = list_journals_by_user(user)
 
     dates = Enum.map(journals, & &1.date_at) |> Cosmos.Date.pad_dates()
 
@@ -61,8 +61,8 @@ defmodule Cosmos.Journaling do
     line_chart(Enum.reverse(labels), Enum.reverse(data))
   end
 
-  def get_chart_data_for(rate_name) do
-    journals = Repo.all(Journal |> order_by(:date_at))
+  def get_chart_data_for(rate_name, user) do
+    journals = list_journals_by_user(user)
 
     dates = Enum.map(journals, & &1.date_at) |> Cosmos.Date.pad_dates()
 
