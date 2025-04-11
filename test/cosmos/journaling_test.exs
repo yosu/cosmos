@@ -7,6 +7,7 @@ defmodule Cosmos.JournalingTest do
     alias Cosmos.Journaling.Journal
 
     import Cosmos.JournalingFixtures
+    import Cosmos.AccountFixtures
 
     @invalid_attrs %{
       date_at: nil,
@@ -22,20 +23,32 @@ defmodule Cosmos.JournalingTest do
       assert Journaling.list_journals() == [j2, j1]
     end
 
+    test "list_journals_by_user/1 returns journals filter by the user" do
+      user = user_fixture()
+      j1 = journal_fixture(%{user_id: user.id})
+      journal_fixture()
+
+      assert Journaling.list_journals_by_user(user) == [j1]
+    end
+
     test "get_journal!/1 returns the journal with given id" do
       journal = journal_fixture()
       assert Journaling.get_journal!(journal.id) == journal
     end
 
     test "create_journal/1 with valid data creates a journal" do
+      user = user_fixture()
+
       valid_attrs = %{
         date_at: ~D[2025-03-13],
         morning_rate: 10,
         afternoon_rate: 10,
-        evening_rate: 10
+        evening_rate: 10,
+        user_id: user.id
       }
 
       assert {:ok, %Journal{} = journal} = Journaling.create_journal(valid_attrs)
+      assert journal.user_id == user.id
       assert journal.date_at == ~D[2025-03-13]
       assert journal.morning_rate == 10
       assert journal.afternoon_rate == 10
@@ -47,7 +60,15 @@ defmodule Cosmos.JournalingTest do
     end
 
     test "create_journal/1 with duplicate date returns error changeset" do
-      attrs = %{date_at: ~D[2025-03-13], morning_rate: 10, afternoon_rate: 10, evening_rate: 10}
+      user = user_fixture()
+
+      attrs = %{
+        user_id: user.id,
+        date_at: ~D[2025-03-13],
+        morning_rate: 10,
+        afternoon_rate: 10,
+        evening_rate: 10
+      }
 
       assert {:ok, %Journal{}} = Journaling.create_journal(attrs)
       assert {:error, %Ecto.Changeset{}} = Journaling.create_journal(attrs)

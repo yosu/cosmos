@@ -10,6 +10,7 @@ defmodule Cosmos.Journaling.Journal do
     field :morning_rate, :integer
     field :afternoon_rate, :integer
     field :evening_rate, :integer
+    belongs_to :user, Cosmos.Account.User
 
     timestamps(type: :utc_datetime_usec)
   end
@@ -17,9 +18,9 @@ defmodule Cosmos.Journaling.Journal do
   @doc false
   def changeset(journal, attrs) do
     journal
-    |> cast(attrs, [:date_at, :morning_rate, :afternoon_rate, :evening_rate])
-    |> validate_required([:date_at])
-    |> unique_constraint(:date_at)
+    |> cast(attrs, [:date_at, :morning_rate, :afternoon_rate, :evening_rate, :user_id])
+    |> validate_required([:date_at, :user_id])
+    |> unique_constraint([:user_id, :date_at])
     |> validate_rates()
   end
 

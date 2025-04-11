@@ -7,13 +7,13 @@ defmodule CosmosWeb.JournalLiveTest do
   @create_attrs %{date_at: "2025-03-14", morning_rate: 10, afternoon_rate: 10, evening_rate: 10}
   @update_attrs %{morning_rate: 0, afternoon_rate: 0, evening_rate: 0}
 
-  defp create_journal(_) do
-    journal = journal_fixture()
+  defp create_journal(%{user: user}) do
+    journal = journal_fixture(%{date_at: ~D[2025-03-01], user_id: user.id})
     %{journal: journal}
   end
 
   describe "Index" do
-    setup [:create_journal, :register_and_log_in_user]
+    setup [:register_and_log_in_user, :create_journal]
 
     test "lists all journals", %{conn: conn} do
       {:ok, _index_live, html} = live(conn, ~p"/journals")
@@ -66,7 +66,7 @@ defmodule CosmosWeb.JournalLiveTest do
   end
 
   describe "Show" do
-    setup [:create_journal, :register_and_log_in_user]
+    setup [:register_and_log_in_user, :create_journal]
 
     test "displays journal", %{conn: conn, journal: journal} do
       {:ok, _show_live, html} = live(conn, ~p"/journals/#{journal}")

@@ -6,7 +6,8 @@ defmodule CosmosWeb.JournalLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :journals, Journaling.list_journals())}
+    {:ok,
+     stream(socket, :journals, Journaling.list_journals_by_user(socket.assigns.current_user))}
   end
 
   @impl true
@@ -44,7 +45,10 @@ defmodule CosmosWeb.JournalLive.Index do
   @impl true
   def handle_info({CosmosWeb.JournalLive.FormComponent, {:created, _journal}}, socket) do
     # Use stream/4 with reset option to keep the list order
-    {:noreply, stream(socket, :journals, Journaling.list_journals(), reset: true)}
+    {:noreply,
+     stream(socket, :journals, Journaling.list_journals_by_user(socket.assigns.current_user),
+       reset: true
+     )}
   end
 
   @impl true

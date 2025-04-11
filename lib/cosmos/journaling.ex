@@ -21,6 +21,18 @@ defmodule Cosmos.Journaling do
     Repo.all(Journal |> order_by(desc: :date_at))
   end
 
+  @doc """
+  Returns the list of journals filter by the user.
+  """
+  def list_journals_by_user(user) do
+    query =
+      from j in Journal,
+        where: j.user_id == ^user.id,
+        order_by: {:desc, :date_at}
+
+    Repo.all(query)
+  end
+
   def get_chart_data_for(:all) do
     journals = Repo.all(Journal |> order_by(:date_at))
 
