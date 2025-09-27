@@ -6,6 +6,7 @@ defmodule CosmosWeb.UserAuth do
   import Phoenix.Controller
 
   alias Cosmos.Account
+  alias Cosmos.Account.Scope
 
   # Make the remember me cookie valid for 60 days.
   # If you want bump or reduce this value, also change
@@ -94,7 +95,10 @@ defmodule CosmosWeb.UserAuth do
   def fetch_current_user(conn, _opts) do
     {user_token, conn} = ensure_user_token(conn)
     user = user_token && Account.get_user_by_session_token(user_token)
-    assign(conn, :current_user, user)
+
+    conn
+    |> assign(:current_user, user)
+    |> assign(:current_scope, Scope.for_user(user))
   end
 
   defp ensure_user_token(conn) do
