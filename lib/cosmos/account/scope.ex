@@ -1,4 +1,5 @@
 defmodule Cosmos.Account.Scope do
+  @moduledoc false
   alias Cosmos.Account.User
 
   defstruct user: nil
