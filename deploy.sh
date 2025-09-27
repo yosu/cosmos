@@ -19,7 +19,9 @@ docker rm dummy
 echo Packaging the release build
 
 cd $TMP
-COPYFILE_DISABLE=1 tar zcf $APP.tar.gz $APP
+# macで圧縮ファイルをlinuxで解凍した際にエラーが出るのを抑制するためformatを指定
+# https://sig9.org/blog/2023/12/15/
+tar --format ustar -zcf $APP.tar.gz $APP
 rm -r $APP
 
 
