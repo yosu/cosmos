@@ -115,7 +115,6 @@ if config_env() == :prod do
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
   config :cosmos, Cosmos.Mailer,
-    adapter: Swoosh.Adapters.Sendgrid,
-    api_key: System.get_env("SENDGRID_API_KEY"),
-    compress: true
+    adapter: Swoosh.Adapters.Mailtrap,
+    api_key: System.get_env("MAILTRAP_API_KEY")
 end
